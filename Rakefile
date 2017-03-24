@@ -46,7 +46,7 @@ task :run do
 
   }
 
-paths.uniq!
+  paths.uniq!
 
   datadir = "data/#{hostname}"
   mkdir_p datadir unless FileTest.directory? datadir
@@ -54,7 +54,7 @@ paths.uniq!
 
     paths.each { |path|
       basename = Pathname.new(path).basename
-      sh "#{FRAME_STATS} --out #{basename.sub_ext('json')} --stride #{stride} #{path}"
+      sh "#{FRAME_STATS} --out #{basename.sub_ext('.json')} --stride #{stride} #{path}"
     }
   end
 
