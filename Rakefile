@@ -2,7 +2,7 @@ require 'pathname'
 require 'net/http'
 require 'json'
 
-BIN_DIR=Pathname.new("../camhd_motion_tracking/build-Debug/bin").expand_path
+BIN_DIR=Pathname.new("../camhd_motion_tracking/build-Release/bin").expand_path
 FRAME_STATS= BIN_DIR.join('frame_stats')
 
 CACHE_URL = "https://camhd-app-dev.appspot.com/v1/org/oceanobservatories/rawdata/files"
