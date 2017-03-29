@@ -1,0 +1,56 @@
+
+ENV['GOOGLE_APPLICATION_CREDENTIALS'] = "../../camhd-image-statistics-8b984ee354f2.json"
+
+PROJECT = "camhd-image-statistics"
+gcr_image = "gcr.io/camhd-image-statistics/camhd-image-statistics"
+
+ZONE = "us-central1-a"
+
+namespace :docker do
+
+  task :build do
+    sh "docker build -t amarburg/camhd-image-statistics:latest ."
+  end
+
+  task :push do
+    sh "docker tag amarburg/camhd-image-statistics:latest #{gcr_image}"
+    sh "gcloud docker -- push #{gcr_image}"
+  end
+
+end
+
+task :create do
+  sh "gcloud --project=#{PROJECT} \
+        compute instances create image-statistics-docker \
+                --preemptible  \
+                --image-family cos-stable \
+                --image-PROJECT cos-cloud \
+                --zone #{ZONE} \
+                --scopes default,storage-full \
+                --machine-type n1-standard-1"
+end
+
+task :buckets do
+  sh "gsutil mb -p #{PROJECT} -l us-central1 -c regional gs://image-statistics-docker-scripts/"
+  sh "gsutil mb -p #{PROJECT} -l us-central1 -c regional gs://image-statistics-docker-data/"
+end
+
+def ssh(cmd="")
+  sh "gcloud --project=#{PROJECT} \
+      compute ssh --zone #{ZONE} image-statistics-docker #{cmd}"
+end
+
+task :ssh do
+  ssh
+end
+
+task :run do
+  #sh "gsutil rm gs://image-statistics-docker-scripts/run.sh"
+  sh "gsutil -h Cache-Control:private cp -a public-read run.sh gs://image-statistics-docker-scripts/runFoo.sh"
+  ssh("--command \"curl -o /tmp/run.sh https://storage.googleapis.com/image-statistics-docker-scripts/runFoo.sh && bash /tmp/run.sh\"")
+end
+
+task :destroy do
+  sh "gcloud --project=#{PROJECT} \
+    compute instances delete image-statistics-docker"
+end

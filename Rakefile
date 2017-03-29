@@ -7,8 +7,11 @@ FRAME_STATS= BIN_DIR.join('frame_stats')
 
 CACHE_URL = "https://camhd-app-dev.appspot.com/v1/org/oceanobservatories/rawdata/files"
 
+CONFIG_FILE = ENV['CONFIG_FILE'] || "#{`hostname`}.txt"
+
 
 stride = 100
+
 
 
 hostname = `hostname -s`.chomp
@@ -21,7 +24,7 @@ end
 
 task :run do
   paths = []
-  File.open( "#{hostname}.txt", 'r')  { |f|
+  File.open( "CONFIG_FILE", 'r')  { |f|
     f.readlines.each { |line|
 
       path = line.chomp
