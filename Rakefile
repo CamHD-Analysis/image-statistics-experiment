@@ -26,7 +26,7 @@ end
 
 task :run do
   paths = []
-  File.open( "CONFIG_FILE", 'r')  { |f|
+  File.open( CONFIG_FILE, 'r')  { |f|
     f.readlines.each { |line|
 
       path = line.chomp
