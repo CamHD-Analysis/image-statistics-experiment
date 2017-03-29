@@ -18,5 +18,8 @@ fi
 docker images
 
 docker run --rm -v ~/image_statistics_experiment:/opt/image_statistics_experiment \
+            --env CONFIG_FILE=gce_docker.txt \
             gcr.io/camhd-image-statistics/camhd-image-statistics \
-            ls -al
+            ls -l /opt/camhd_motion_analysis
+
+            #rake run
