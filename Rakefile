@@ -7,7 +7,9 @@ FRAME_STATS= BIN_DIR.join('frame_stats')
 
 CACHE_URL = "https://camhd-app-dev.appspot.com/v1/org/oceanobservatories/rawdata/files"
 
-CONFIG_FILE = ENV['CONFIG_FILE'] || "#{`hostname`}.txt"
+CONFIG_FILE = ENV['CONFIG_FILE'] || "#{`hostname`.chomp}.txt"
+
+raise "Can't find #{CONFIG_FILE}" unless FileTest.exists? CONFIG_FILE
 
 
 stride = 100
