@@ -1,0 +1,28 @@
+{
+    "elapsedSystemTime": 115.026716221,
+    "movie": {
+        "Duration": 840.039184570312,
+        "NumFrames": 25176,
+        "URL": "https://rawdata.oceanobservatories.org/files//RS03ASHS/PN03B/06-CAMHDA301/2016/09/06/CAMHDA301-20160906T120000Z.mov",
+        "cacheURL": "https://camhd-app-dev.appspot.com/v1/org/oceanobservatories/rawdata/files/RS03ASHS/PN03B/06-CAMHDA301/2016/09/06/CAMHDA301-20160906T120000Z.mov"
+    },
+    "stats": [
+        {
+            "chanMeans": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "chanStdDevs": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "frameNum": 1,
+            "mean": 0.0,
+            "stdDev": 0.0
+        }
+    ]
+}
